@@ -135,7 +135,7 @@
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script>
     // Initialisation EmailJS
-    emailjs.init("JV835J52qPjAMvutT");
+    emailjs.init("OE3a7SSZwWXqoNPU1");
 
     document.getElementById('booking-form').addEventListener('submit', function(e) {
       e.preventDefault();
