@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
@@ -136,7 +135,7 @@
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script>
     // Initialisation EmailJS
-    emailjs.init("RSd4LXLa_qD6tCn6k");
+    emailjs.init("JV835J52qPjAMvutT");
 
     document.getElementById('booking-form').addEventListener('submit', function(e) {
       e.preventDefault();
