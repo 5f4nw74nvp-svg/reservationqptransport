@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
@@ -100,30 +100,30 @@
     <h1>RÉSERVATION VTC</h1>
     <p>Service de transport privé haut de gamme</p>
 
-    <form onsubmit="sendWhatsApp(); return false;">
+    <form id="booking-form">
 
       <label>Adresse de pick-up</label>
-      <input type="text" id="pickup" required />
+      <input type="text" id="pickup" name="pickup" required />
 
       <label>Date et heure de pick-up</label>
-      <input type="datetime-local" id="datetime" required />
+      <input type="datetime-local" id="datetime" name="datetime" required />
 
       <label>Adresse de dépose</label>
-      <input type="text" id="dropoff" required />
+      <input type="text" id="dropoff" name="dropoff" required />
 
       <label>Nombre de passagers</label>
-      <input type="number" id="passengers" required />
+      <input type="number" id="passengers" name="passengers" required />
 
       <label>Nom(s)</label>
-      <input type="text" id="names" required />
+      <input type="text" id="names" name="names" required />
 
       <label>Numéro de téléphone</label>
-      <input type="tel" id="phone" required />
+      <input type="tel" id="phone" name="phone" required />
 
       <label>Informations supplémentaires</label>
-      <textarea id="infos" placeholder="Vol, train, terminal, demandes particulières..."></textarea>
+      <textarea id="infos" name="infos" placeholder="Vol, train, terminal, demandes particulières..."></textarea>
 
-      <button type="submit">ENVOYER LA DEMANDE VIA WHATSAPP</button>
+      <button type="submit">ENVOYER LA DEMANDE</button>
     </form>
 
     <div class="footer">
@@ -132,21 +132,32 @@
 
   </div>
 
+  <!-- EmailJS Script -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script>
-    function sendWhatsApp() {
-      const pickup = document.getElementById('pickup').value;
-      const datetime = document.getElementById('datetime').value;
-      const dropoff = document.getElementById('dropoff').value;
-      const passengers = document.getElementById('passengers').value;
-      const names = document.getElementById('names').value;
-      const phone = document.getElementById('phone').value;
-      const infos = document.getElementById('infos').value;
+    emailjs.init("YOUR_PUBLIC_KEY"); // Remplace par ta Public Key EmailJS
 
-      const message = `Bonjour QP TRANSPORT,%0A%0AJe souhaite réserver un VTC.%0A%0A📍 Pick-up : ${pickup}%0A🕒 Date & heure : ${datetime}%0A📍 Dépose : ${dropoff}%0A👥 Passagers : ${passengers}%0A👤 Nom(s) : ${names}%0A📞 Téléphone : ${phone}%0A✈️ Infos : ${infos}`;
+    document.getElementById('booking-form').addEventListener('submit', function(e) {
+      e.preventDefault();
 
-      const url = `https://wa.me/33635215052?text=${message}`;
-      window.open(url, '_blank');
-    }
+      const formData = {
+        pickup: document.getElementById('pickup').value,
+        datetime: document.getElementById('datetime').value,
+        dropoff: document.getElementById('dropoff').value,
+        passengers: document.getElementById('passengers').value,
+        names: document.getElementById('names').value,
+        phone: document.getElementById('phone').value,
+        infos: document.getElementById('infos').value
+      };
+
+      emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", formData)
+        .then(function() {
+          alert("Votre demande a été envoyée ! Merci.");
+          document.getElementById('booking-form').reset();
+        }, function(error) {
+          alert("Erreur lors de l'envoi : " + JSON.stringify(error));
+        });
+    });
   </script>
 
 </body>
