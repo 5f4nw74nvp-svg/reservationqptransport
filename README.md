@@ -123,7 +123,7 @@
       <label>Informations supplémentaires</label>
       <textarea id="infos" name="infos" placeholder="Vol, train, terminal, demandes particulières..."></textarea>
 
-      <button type="submit">ENVOYER LA DEMANDE</button>
+      <button type="submit">VALIDER LA DEMANDE</button>
     </form>
 
     <div class="footer">
@@ -135,7 +135,8 @@
   <!-- EmailJS Script -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script>
-    emailjs.init("YOUR_PUBLIC_KEY"); // Remplace par ta Public Key EmailJS
+    // Initialisation EmailJS
+    emailjs.init("RSd4LXLa_qD6tCn6k");
 
     document.getElementById('booking-form').addEventListener('submit', function(e) {
       e.preventDefault();
@@ -150,7 +151,7 @@
         infos: document.getElementById('infos').value
       };
 
-      emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", formData)
+      emailjs.send("service_x55cdc4", "template_8cnuf1y", formData)
         .then(function() {
           alert("Votre demande a été envoyée ! Merci.");
           document.getElementById('booking-form').reset();
